@@ -12,6 +12,17 @@
                 <meta name="author" content="Hỏi Dân IT" />
                 <title>Update - Hao-huengmin</title>
                 <link href="/css/styles.css" rel="stylesheet" />
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
@@ -32,17 +43,18 @@
                                 <div class="row">
                                     <div class="col-md-6 col-12 mx-auto">
                                         <h3>User Update</h3>
-                                        <form:form method="post" action="/admin/user/update" modelAttribute="newUser">
-                                            <div class="mb-3" style="display: none;">
+                                        <form:form method="post" enctype="multipart/form-data"
+                                            action="/admin/user/update" modelAttribute="newUser" class="row">
+                                            <div class="mb-3 col-12 col-md-6" style="display: none;">
                                                 <label for="id" class="form-label">Id</label>
                                                 <form:input type="number" class="form-control" path="id" />
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 col-12 col-md-6">
                                                 <label for="email" class="form-label">Email address</label>
                                                 <form:input type="email" class="form-control" path="email" />
                                             </div>
 
-                                            <div class="mb-3">
+                                            <div class="mb-3 col-12 col-md-6">
                                                 <label for="name" class="form-label">Full Name</label>
                                                 <form:input type="text" class="form-control" path="name" />
                                             </div>
@@ -50,9 +62,25 @@
                                                 <label for="address" class="form-label">Address</label>
                                                 <form:input type="text" class="form-control" path="address" />
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 col-12 col-md-6">
                                                 <label for="phone" class="form-label">Phone Number</label>
                                                 <form:input type="text" class="form-control" path="phone" />
+                                            </div>
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label for="avatarFile" class="form-label">Avatar</label>
+                                                <input class="form-control" type="file" id="avatarFile"
+                                                    accept=".png, .jpg, .jpeg" name="hao_File" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                    id="avatarPreview">
+                                            </div>
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label for="role.name" class="form-label">Role</label>
+                                                <form:select class="form-select" path="role.name">
+                                                    <form:option value="ADMIN">ADMIN</form:option>
+                                                    <form:option value="USER">USER</form:option>
+                                                </form:select>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </form:form>

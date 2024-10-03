@@ -3,6 +3,7 @@ package vn.bxhao.laptopshop.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import vn.bxhao.laptopshop.domain.Role;
 import vn.bxhao.laptopshop.domain.User;
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     void deleteById(long id);
 
+    Role findByName(String name);
 }

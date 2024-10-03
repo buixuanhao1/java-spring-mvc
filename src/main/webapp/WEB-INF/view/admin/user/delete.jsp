@@ -42,6 +42,9 @@
                                             </div>
                                             <button type="submit" class="btn btn-success">Confirm</button>
                                         </form>
+                                        <div class="mt-5">
+                                            <a href="/admin/user" type="submit" class="btn btn-primary">Back</a>
+                                        </div>
 
 
                                     </div>

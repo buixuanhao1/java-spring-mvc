@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import vn.bxhao.laptopshop.repository.UserRepository;
+import vn.bxhao.laptopshop.domain.Role;
 import vn.bxhao.laptopshop.domain.User;
 
 @Service
@@ -38,6 +39,10 @@ public class UserService {
 
     public void deleteUserById(long id) {
         userRepository.deleteById(id);
+    }
+
+    public Role FindRoleByName(String name) {
+        return this.userRepository.findByName(name);
     }
 
 }

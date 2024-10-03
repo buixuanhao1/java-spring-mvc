@@ -20,6 +20,9 @@ public class UploadServic {
     }
 
     public String handleSaveUpLoadFile(MultipartFile file, String targetFolder) {
+        if (file.isEmpty()) {
+            return "";
+        }
         String rootPath = this.servletContext.getRealPath("/resources/images");
         String finalName = "";
         try {
@@ -30,6 +33,7 @@ public class UploadServic {
             if (!dir.exists())
                 dir.mkdirs();
             // Create the file on server
+
             finalName = System.currentTimeMillis() + "-" + file.getOriginalFilename();
             File serverFile = new File(dir.getAbsolutePath() + File.separator
                     + finalName);

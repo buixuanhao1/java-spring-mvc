@@ -2,12 +2,16 @@ package vn.bxhao.laptopshop.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "products")
@@ -16,11 +20,23 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Size(min = 5, message = "FullName phải có tối thiểu 3 ký tự")
     private String name;
+
+    @Min(value = 1, message = "Price phải lớn hơn hoặc bằng 1")
     private double price;
     private String image;
+
+    @NotNull
+    @NotEmpty(message = "detailDesc không được để trống")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
+
+    @NotEmpty(message = "ShortDesc không được để trống")
     private String shortDesc;
+
+    @Min(value = 1, message = "Quanlity phải lớn hơn hoặc bằng 1")
     private long quantity;
     private long sold;
     private String factory;

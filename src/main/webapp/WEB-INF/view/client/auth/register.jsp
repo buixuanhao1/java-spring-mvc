@@ -35,10 +35,16 @@
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">
                                                                 <!-- Bind với thuộc tính fistName -->
-                                                                <form:input path="fistName" class="form-control"
+                                                                <c:set var="errorFirstName">
+                                                                    <form:errors path="fistName"
+                                                                        cssClass="invalid-feedback" />
+                                                                </c:set>
+                                                                <form:input path="fistName"
+                                                                    class="form-control ${not empty errorFirstName ? 'is-invalid' : ''}"
                                                                     id="inputFirstName"
                                                                     placeholder="Enter your first name" />
                                                                 <label for="inputFirstName">First name</label>
+                                                                ${errorFirstName}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -53,24 +59,36 @@
                                                     </div>
                                                     <div class="form-floating mb-3">
                                                         <!-- Bind với thuộc tính email -->
-                                                        <form:input path="email" class="form-control" id="inputEmail"
-                                                            type="email" placeholder="name@example.com" />
+                                                        <c:set var="errorEmail">
+                                                            <form:errors path="email" cssClass="invalid-feedback" />
+                                                        </c:set>
+                                                        <form:input path="email"
+                                                            class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
+                                                            id="inputEmail" type="email"
+                                                            placeholder="name@example.com" />
                                                         <label for="inputEmail">Email address</label>
+                                                        ${errorEmail}
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">
                                                                 <!-- Bind với thuộc tính password -->
-                                                                <form:input path="password" class="form-control"
+                                                                <c:set var="errorPassword">
+                                                                    <form:errors path="confirmPassword"
+                                                                        cssClass="invalid-feedback" />
+                                                                </c:set>
+                                                                <form:input path="password"
+                                                                    class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
                                                                     id="inputPassword" type="password"
                                                                     placeholder="Create a password" />
                                                                 <label for="inputPassword">Password</label>
+                                                                ${errorPassword}
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-floating mb-3 mb-md-0">
                                                                 <!-- Bind với thuộc tính confirmPassword -->
-                                                                <form:input path="confirmPassword" class="form-control"
+                                                                <form:input path="confirmPassword" class="form-control "
                                                                     id="inputPasswordConfirm" type="password"
                                                                     placeholder="Confirm password" />
                                                                 <label for="inputPasswordConfirm">Confirm

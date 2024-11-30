@@ -55,9 +55,9 @@
                                                     <td>
                                                         <a href="/admin/user/${user.id}"
                                                             class="btn btn-primary">View</a>
-                                                        <a href="/admin/user/update${user.id}"
+                                                        <a href="/admin/user/update/${user.id}"
                                                             class="btn btn-success">Update</a>
-                                                        <a href="/admin/user/delete${user.id}"
+                                                        <a href="/admin/user/delete/${user.id}"
                                                             class="btn btn-danger">Delete</a>
                                                     </td>
                                                 </tr>

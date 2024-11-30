@@ -1,27 +1,31 @@
-package vn.bxhao.laptopshop.servic;
+package vn.bxhao.laptopshop.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import vn.bxhao.laptopshop.repository.RoleRepository;
 import vn.bxhao.laptopshop.repository.UserRepository;
 import vn.bxhao.laptopshop.domain.Role;
 import vn.bxhao.laptopshop.domain.User;
+import vn.bxhao.laptopshop.domain.dto.RegisterDTO;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public User handleSaveUser(User user) {
         return userRepository.save(user);
     }
 
-    public List<User> FindByEmail(String email) {
+    public User FindByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -42,7 +46,19 @@ public class UserService {
     }
 
     public Role FindRoleByName(String name) {
-        return this.userRepository.findByName(name);
+        return this.roleRepository.findByName(name);
+    }
+
+    public User RegisterDtoToUser(RegisterDTO registerDTO) {
+        User user = new User();
+        user.setName(registerDTO.getFistName() + registerDTO.getLastName());
+        user.setPassWord(registerDTO.getPassword());
+        user.setEmail(registerDTO.getEmail());
+        return user;
+    }
+
+    public boolean CheckEmailExists(String email) {
+        return this.userRepository.existsByEmail(email);
     }
 
 }

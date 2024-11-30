@@ -1,6 +1,5 @@
 package vn.bxhao.laptopshop.domain;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,17 +9,23 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "order_detail")
-public class OrderDetail {
+@Table(name = "cart_detail")
+public class CartDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long quantity;
-    private double price;
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
 
+    private long quantity;
+
+    private double price;
+
+    // cart_id: long
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    // product_id: long
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -49,12 +54,12 @@ public class OrderDetail {
         this.price = price;
     }
 
-    public Order getOrder() {
-        return order;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public Product getProduct() {

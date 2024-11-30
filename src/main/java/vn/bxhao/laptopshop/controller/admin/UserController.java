@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import vn.bxhao.laptopshop.domain.Role;
 import vn.bxhao.laptopshop.domain.User;
-import vn.bxhao.laptopshop.servic.UploadServic;
-import vn.bxhao.laptopshop.servic.UserService;
+import vn.bxhao.laptopshop.service.UploadServic;
+import vn.bxhao.laptopshop.service.UserService;
 
 @Controller
 public class UserController {
@@ -46,7 +46,7 @@ public class UserController {
         }
 
         if (newUserBindingResult.hasErrors()) {
-            return "/admin/user/create";
+            return "admin/user/create";
         }
 
         String avatar = uploadServic.handleSaveUpLoadFile(file, "avatar");
@@ -99,7 +99,7 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-    @RequestMapping("/admin/user/delete{id}")
+    @GetMapping("/admin/user/delete/{id}")
     public String deleteUser(Model model, @PathVariable Long id) {
         model.addAttribute("id", id);
         return "admin/user/delete";

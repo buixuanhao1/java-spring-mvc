@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import vn.bxhao.laptopshop.domain.Product;
 import vn.bxhao.laptopshop.domain.Role;
 import vn.bxhao.laptopshop.domain.User;
-import vn.bxhao.laptopshop.servic.ProductService;
-import vn.bxhao.laptopshop.servic.UploadServic;
+import vn.bxhao.laptopshop.service.ProductService;
+import vn.bxhao.laptopshop.service.UploadServic;
 
 @Controller
 public class ProductController {
@@ -35,7 +37,7 @@ public class ProductController {
     @GetMapping("/admin/product")
     public String getProduct(Model model) {
         model.addAttribute("products", productService.FindAllProducts());
-        return "/admin/product/show";
+        return "admin/product/show";
     }
 
     @GetMapping("/admin/product/create")
@@ -55,7 +57,7 @@ public class ProductController {
         }
 
         if (newUserBindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
         String nameImage = this.uploadServic.handleSaveUpLoadFile(file, "Product");
         Product product = new Product();
@@ -78,13 +80,13 @@ public class ProductController {
     @GetMapping("/admin/product/{id}")
     String getDetailProduct(@PathVariable Long id, Model model) {
         model.addAttribute("product", this.productService.FindProduct(id).get());
-        return "/admin/product/detail";
+        return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/update/{id}")
     String ViewUpdateProduct(@PathVariable Long id, Model model) {
         model.addAttribute("newProduct", this.productService.FindProduct(id).get());
-        return "/admin/product/updateProduct";
+        return "admin/product/updateProduct";
     }
 
     @PostMapping("/admin/product/update")
@@ -112,7 +114,7 @@ public class ProductController {
     @GetMapping("/admin/product/delete/{id}")
     public String DeleteProduct(Model model, @PathVariable Long id) {
         model.addAttribute("id", id);
-        return "/admin/product/delete";
+        return "admin/product/delete";
     }
 
     @PostMapping("/admin/product/delete")
